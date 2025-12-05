@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AutomateX — AI websites, chatbots & automations</title>
+  <meta name="description" content="AutomateX — AI builds websites, chatbots & automations in minutes. Get a live demo, pay & deploy. Preview-first or deposit-first workflows."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#F5F7FA;
+      --primary:#0B2545;
+      --accent:#00C2FF;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --radius:12px;
+      --glass: rgba(255,255,255,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Arial,sans-serif;
+      background:linear-gradient(180deg,#f8fbff 0%, #f5f7fa 100%);
+      color:var(--primary); -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale; line-height:1.45;
+    }
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:6px 0}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo-mark{
+      width:44px;height:44px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--primary));
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:Poppins;
+      box-shadow: 0 8px 20px rgba(11,37,69,0.08);
+    }
+    .brand{font-weight:600;font-family:Poppins;font-size:18px}
+    nav a{color:var(--primary);text-decoration:none;margin-left:18px;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:40px 0}
+    .hero h1{font-family:Poppins;font-size:36px;margin:0;color:var(--primary)}
+    .hero p{color:var(--muted);margin:14px 0 20px}
+    .cta-row{display:flex;gap:12px;align-items:center}
+    .btn{
+      background: linear-gradient(90deg,var(--accent),var(--primary));
+      color:#fff;padding:12px 18px;border-radius:12px;border:0;cursor:pointer;font-weight:700;
+      transition: transform .18s ease, box-shadow .18s ease; box-shadow: 0 8px 24px rgba(11,37,69,0.08);
+    }
+    .btn.secondary{background:transparent;color:var(--primary);border:1px solid rgba(11,37,69,0.06)}
+    .btn:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,37,69,0.12)}
+    .card{
+      background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 14px 36px rgba(2,6,23,0.06);
+    }
+
+    /* Form column */
+    .build-card h3{margin:0 0 8px;font-size:18px}
+    .field{margin:10px 0}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type="text"],select,textarea{
+      width:100%;padding:10px;border-radius:10px;border:1px solid #e6eef8;background:#fff;font-size:14px;
+    }
+    textarea{min-height:80px;resize:vertical}
+    .small-note{font-size:13px;color:var(--muted);margin-top:6px}
+
+    /* services */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}
+    .service-card{padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfdff);transition:transform .24s,box-shadow .24s}
+    .service-card:hover{transform:translateY(-8px);box-shadow:0 28px 60px rgba(2,6,23,0.10)}
+    .service-title{font-weight:700;margin-bottom:6px}
+    .price-badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(0,194,255,0.08);color:var(--accent);font-weight:700;font-size:13px}
+
+    /* demo gallery */
+    .gallery{display:flex;gap:12px;overflow:auto;padding-bottom:6px}
+    .thumb{min-width:240px;height:150px;border-radius:10px;overflow:hidden;flex:0 0 auto;position:relative;background:#eef8ff}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb .label{position:absolute;left:8px;bottom:8px;background:rgba(11,37,69,0.9);color:white;padding:6px 8px;border-radius:8px;font-size:13px}
+
+    /* pricing */
+    .pricing{display:flex;gap:18px;margin:28px 0}
+    .plan{flex:1;padding:18px;border-radius:12px;background:#fff;border:1px solid rgba(11,37,69,0.04);transition:transform .18s,box-shadow .18s}
+    .plan:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(11,37,69,0.06)}
+    .plan h4{margin:0 0 10px}
+    .plan .price{font-size:22px;font-weight:700;color:var(--primary)}
+    .muted{color:var(--muted)}
+
+    footer{padding:32px 0;text-align:center;color:var(--muted);font-size:14px}
+
+    /* reveal on scroll */
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s, transform .6s}
+    .reveal.in-view{opacity:1;transform:translateY(0)}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr; padding-bottom:8px}
+      .services{grid-template-columns:repeat(2,1fr)}
+      .pricing{flex-direction:column}
+    }
+    @media (max-width:560px){
+      .services{grid-template-columns:1fr}
+    }
+
+    /* preview watermark (automatically toggled by automation) */
+    #preview-banner{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9999;background:linear-gradient(90deg,rgba(11,37,69,0.95),rgba(0,194,255,0.95));color:white;padding:8px 16px;border-radius:999px;font-weight:700;display:none}
+    #preview-banner.show{display:block}
+
+    /* simple token based dashboard link style */
+    .dash-link{display:inline-block;margin-top:12px;padding:8px 10px;border-radius:10px;background:rgba(11,37,69,0.04);font-weight:700}
+  </style>
+</head>
+<body>
+  <div id="preview-banner" class="show">Preview — AutomateX Demo (watermark)</div>
+
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-mark">AX</div>
+        <div>
+          <div class="brand">AutomateX</div>
+          <div style="font-size:12px;color:var(--muted)">AI-powered website & automation agency</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#demo">Demo</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="hero">
+      <div>
+        <h1>AI builds websites, chatbots & automations — in minutes.</h1>
+        <p>Enter your need. See a live demo. Unlock & deploy. Preview-first or deposit-first workflows — fully automated with zero manual pain.</p>
+        <div class="cta-row">
+          <button class="btn" id="getDemoBtn">Get a Demo</button>
+          <button class="btn secondary" id="seeTemplates">See Templates</button>
+        </div>
+
+        <div style="margin-top:20px" class="reveal">
+          <div style="display:flex;gap:10px;align-items:center">
+            <div class="card" style="padding:12px;display:flex;gap:12px;align-items:center;">
+              <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--primary));display:flex;align-items:center;justify-content:center;color:white;font-weight:700">⚡</div>
+              <div>
+                <div style="font-weight:700">Preview-first or Deposit model</div>
+                <div class="muted" style="font-size:13px">Low-trust clients? preview first. Complex jobs? 30% deposit to start.</div>
+              </div>
+            </div>
+            <div class="card" style="padding:12px;display:flex;gap:12px;align-items:center;">
+              <div style="width:44px;height:44px;border-radius:10px;background:#eef7ff;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">🔧</div>
+              <div>
+                <div style="font-weight:700">Automated builder</div>
+                <div class="muted" style="font-size:13px">AI fills templates, builder deploys preview & final site automatically.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="card build-card">
+          <h3>Request a free demo</h3>
+          <form id="leadForm">
+            <div class="field">
+              <label>Business name</label>
+              <input type="text" id="bizName" placeholder="Ex: Nani Café">
+            </div>
+            <div class="field">
+              <label>Service needed</label>
+              <select id="serviceType">
+                <option>Website — One page</option>
+                <option>Website — Multi page</option>
+                <option>Chatbot</option>
+                <option>Automation (Zap/Make)</option>
+                <option>Pro Bundle</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Describe requirement</label>
+              <textarea id="brief" placeholder="Short details: colors, pages, features..."></textarea>
+            </div>
+            <div class="field">
+              <label>Contact (WhatsApp / Email)</label>
+              <input type="text" id="contact" placeholder="Phone or email">
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+              <div>
+                <div class="small-note">A demo link will be sent within 30 mins (preview mode).</div>
+              </div>
+              <button type="submit" class="btn">Send & Get Demo</button>
+            </div>
+          </form>
+          <div style="font-size:12px;color:var(--muted);margin-top:10px">By submitting you agree to our <a href="#" style="color:var(--accent);text-decoration:none">terms</a>.</div>
+        </div>
+
+        <div style="height:16px"></div>
+
+        <div class="card" style="text-align:center">
+          <div style="font-weight:700">Need help? Chat with the AI</div>
+          <div style="margin-top:12px">
+            <!-- CHAT WIDGET PLACEHOLDER - replace with Botpress/Chatbase widget script -->
+            <div id="chatWidget" style="height:200px;border-radius:10px;border:1px dashed rgba(11,37,69,0.06);display:flex;align-items:center;justify-content:center;color:var(--muted)">
+              Chat widget placeholder<br><small>Botpress / Chatbase embed goes here</small>
+            </div>
+            <a class="dash-link" href="#contact">Contact Sales</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="services" class="reveal">
+      <h3 style="margin-bottom:12px">Our Services</h3>
+      <div class="services">
+        <div class="service-card">
+          <div class="service-title">Micro Site</div>
+          <div class="muted">One-page landing optimized for conversions.</div>
+          <div style="margin-top:12px"><span class="price-badge">₹999</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-title">Business Site</div>
+          <div class="muted">3–5 pages, contact form, chat widget.</div>
+          <div style="margin-top:12px"><span class="price-badge">₹4,299</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-title">Chatbot</div>
+          <div class="muted">FAQ bot, booking flow, website/WhatsApp embed.</div>
+          <div style="margin-top:12px"><span class="price-badge">₹1,499</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="reveal">
+      <h3 style="margin-bottom:12px">Demo Gallery</h3>
+      <div class="gallery">
+        <div class="thumb card"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=600&auto=format&fit=crop&crop=entropy" alt="demo"><div class="label">Micro Landing</div></div>
+        <div class="thumb card"><img src="https://images.unsplash.com/photo-1506368249639-73a05d6f6488?q=80&w=600&auto=format&fit=crop&crop=entropy" alt="demo"><div class="label">Business Basic</div></div>
+        <div class="thumb card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop&crop=entropy" alt="demo"><div class="label">E-commerce Mini</div></div>
+      </div>
+    </section>
+
+    <section id="pricing" class="reveal">
+      <h3 style="margin-bottom:12px">Pricing</h3>
+      <div class="pricing">
+        <div class="plan card">
+          <h4>Micro Site</h4>
+          <div class="price">₹999</div>
+          <div class="muted" style="margin-top:8px">One-page preview-first (watermarked). Unlock after payment.</div>
+        </div>
+        <div class="plan card">
+          <h4>Business Site</h4>
+          <div class="price">₹4,299</div>
+          <div class="muted" style="margin-top:8px">Custom jobs: 30% deposit. Delivery in 3–7 days.</div>
+        </div>
+        <div class="plan card">
+          <h4>Pro Bundle</h4>
+          <div class="price">₹7,999</div>
+          <div class="muted" style="margin-top:8px">Site + Chatbot + Automations + 30 days maintenance.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal" style="margin-top:22px">
+      <h3>Contact & Dashboard</h3>
+      <div style="display:flex;gap:18px;flex-wrap:wrap">
+        <div class="card" style="flex:1;min-width:280px">
+          <strong>AutomateX</strong><br>
+          <div class="muted">Email: hello@automatex.app</div>
+          <div class="muted">Phone/WhatsApp: +91 98765 43210</div>
+          <div style="margin-top:12px"><a href="#" class="dash-link">Client Dashboard</a></div>
+        </div>
+        <div class="card" style="flex:1;min-width:280px">
+          <strong>Office</strong><br>
+          <div class="muted">Your City, India</div>
+          <div style="margin-top:12px">Terms | Privacy | Refund policy</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      AutomateX — © <span id="year"></span> • Built with AI • Preview demos are watermarked.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    // reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in-view'); });
+    },{threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // form submit -> webhook (replace URL)
+    const form = document.getElementById('leadForm');
+    form.addEventListener('submit', async (ev)=>{
+      ev.preventDefault();
+      const payload = {
+        business: document.getElementById('bizName').value || 'Anonymous',
+        service: document.getElementById('serviceType').value,
+        brief: document.getElementById('brief').value,
+        contact: document.getElementById('contact').value,
+        timestamp: new Date().toISOString()
+      };
+      // replace YOUR_WEBHOOK_URL with your Make.com / Zapier webhook
+            const WEBHOOK = 'https://webhook.site/b818941a-9ffe-4777-8ac5-513b295a57b5'; // your webhook.site (or later Make.com) URL
+      try {
+        await fetch(WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          mode: 'no-cors'   // <— important
+        });
+        alert('Thanks — demo request seems sent! Check your webhook for data.');
+        form.reset();
+      } catch (err) {
+        console.error('Webhook error:', err);
+        alert('There was an error sending the request from your browser. If it persists, message hello@automatex.app');
+      }
+
+    });
+
+    // small UX: demo button scroll
+    document.getElementById('getDemoBtn').addEventListener('click',()=>{ location.hash = '#contact'; document.getElementById('bizName').focus(); });
+    document.getElementById('seeTemplates').addEventListener('click',()=>{ location.hash = '#demo'; });
+
+    // preview banner toggle (automation can call this via injecting ?preview=false)
+    function togglePreviewBanner(show=true){
+      const el = document.getElementById('preview-banner');
+      if(show) el.classList.add('show'); else el.classList.remove('show');
+    }
+    // Example: hide banner if URL param preview=false
+    const urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.get('preview') === 'false') togglePreviewBanner(false);
+  </script>
+</body>
+</html>
